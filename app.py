@@ -6,8 +6,11 @@ import cmd
 import base64
 import requests
 import json
+import os
 
 app = Flask(__name__)
+
+token = os.environ.get("FLASK_TOKEN")
 
 
 def schedule_dowlink(devEUI, payload, port):
@@ -19,7 +22,7 @@ def schedule_dowlink(devEUI, payload, port):
 
     res = requests.post(
         url="https://connector.koretmdata.com.br/api/v2/downlinks",
-        headers={"Authorization": "IsMM0SYDXdnoqIEenPiSBFxsaUvUfDt5"},
+        headers={"Authorization": f"{token}"},
         data=body,
     )
     return json.dumps(res.json(), indent=3)
