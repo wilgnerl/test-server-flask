@@ -45,8 +45,9 @@ def server():
             # VERIFICA SE TEM DADOS NO BODY
             if request.data:
                 # VERIFICA SE VEIO PAYLOAD NO BODY
+                print(json.loads(request.data)["params"])
                 if json.loads(request.data)["params"]["payload"]:
-                    print(json.loads(request.data)["params"])
+                    
                     # PEGA PAYLOAD
                     payload = json.loads(request.data)["params"]["payload"]
                     print(f"Payload: {payload}")
