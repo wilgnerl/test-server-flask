@@ -1,3 +1,4 @@
+from textwrap import indent
 from flask import Flask
 from flask import request
 from flask import Response
@@ -45,7 +46,7 @@ def server():
             if request.data:
                 # VERIFICA SE VEIO PAYLOAD NO BODY
                 if json.loads(request.data)["params"]["payload"]:
-
+                    print(json.loads(request.data)["params"])
                     # PEGA PAYLOAD
                     payload = json.loads(request.data)["params"]["payload"]
                     print(f"Payload: {payload}")
