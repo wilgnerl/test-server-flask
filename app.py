@@ -37,8 +37,7 @@ def schedule_dowlink(payload, port):
             headers={"Authorization": f"{token}"},
             data=body,
         )
-    print("Função dowlink: ", response.json())
-    return response.json()
+    return response.text
 
 
 @app.route("/server", methods=["POST", "GET"])
@@ -51,8 +50,8 @@ def server():
             # VERIFICA SE TEM DADOS NO BODY
             if request.data:
                 # VERIFICA SE VEIO PAYLOAD NO BODY
-                print(json.loads(request.data)["params"])
-                if json.loads(request.data)["params"]["payload"]:
+                print(json.loads(request.data))
+                if "payload" in json.loads(request.data)["params"]:
                     
                     # PEGA PAYLOAD
                     payload = json.loads(request.data)["params"]["payload"]
@@ -78,13 +77,13 @@ def server():
                     )
                     
                     print("Downlink: ", response)
-                    return Response("", status=201, mimetype="application/json")
+                    
                 else:
                     return Response("", status=201, mimetype="application/json")
-            
+        return Response("", status=201, mimetype="application/json")
     except OSError as err:
         print(err)
-        return Response("Error", status=404, mimetype="application/json")
+        return Response(f"{err}", status=404, mimetype="application/json")
 
 if __name__ == "__main__":
     app.debug = True
