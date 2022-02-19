@@ -20,10 +20,10 @@ def index():
     return "server running"
 
 
-def schedule_dowlink(devEUI, payload, port):
+def schedule_dowlink(payload, port):
 
     body = {}
-    body["devEUI"] = devEUI
+    body["devEUI"] = "b34ce266b68008a9"
     body["payload"] = payload
     body["port"] = port
 
@@ -67,10 +67,10 @@ def server():
                     payloadDownlink = base64.b64encode(responseProcess)
                     print(f"Payload base64 to downlink: {payloadDownlink}")
 
-                    # response = schedule_dowlink(
-                    #     devEUI=devEUI, payload=payloadDownlink, port=port
-                    # )
-                    # print(response)
+                    response = schedule_dowlink(
+                        payload=payloadDownlink, port=10
+                    )
+                    print(response)
 
             return Response("", status=201, mimetype="application/json")
     except:
