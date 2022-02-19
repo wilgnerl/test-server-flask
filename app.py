@@ -26,6 +26,7 @@ def schedule_dowlink(payload, port):
     body["devEUI"] = "b34ce266b68008a9"
     body["payload"] = payload
     body["port"] = port
+    print("Body dowlink: ", body)
 
     res = requests.post(
         url="https://connector.koretmdata.com.br/api/v2/downlinks",
