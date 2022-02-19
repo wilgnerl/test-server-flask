@@ -23,7 +23,7 @@ def index():
 def schedule_dowlink(payload, port):
 
     body = {}
-    body["devEUI"] = "b34ce266b68008a9"
+    body["devEUI"] = "0100000000000001"
     body["payload"] = payload
     body["port"] = port
     print("Body dowlink: ", body)
