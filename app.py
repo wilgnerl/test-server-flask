@@ -8,6 +8,7 @@ import base64
 import requests
 import json
 import os
+import aiohttp
 
 
 token = os.environ.get("FLASK_TOKEN")
@@ -19,8 +20,7 @@ app = Flask(__name__)
 def index():
     return "server running"
 
-
-def schedule_dowlink(payload, port):
+async def schedule_dowlink(payload, port):
 
     body = {}
     body["devEUI"] = "0100000000000001"
@@ -28,13 +28,14 @@ def schedule_dowlink(payload, port):
     body["port"] = port
     print("Body dowlink: ", body)
 
-    res = requests.post(
+    res = await aiohttp.request(
+        method="POST",
         url="https://connector.koretmdata.com.br/api/v2/downlinks",
         headers={"Authorization": f"{token}"},
         data=body,
     )
     print("Função dowlink: ", res.data)
-    return json.dumps(res.json(), indent=3)
+    return json.dumps(res.data, indent=3)
 
 
 @app.route("/server", methods=["POST", "GET"])
@@ -68,7 +69,7 @@ def server():
                     # PEGA RESPOSTA DO TESTE E CODIFICA PARA BASE64
                     payloadDownlink = base64.b64encode(responseProcess)
                     print(f"Payload base64 to downlink: {payloadDownlink}")
-
+                 
                     response = schedule_dowlink(
                         payload=payloadDownlink, port=10
                     )
