@@ -32,6 +32,7 @@ def schedule_dowlink(payload, port):
         headers={"Authorization": f"{token}"},
         data=body,
     )
+    print("Função dowlink: ", res.data)
     return json.dumps(res.json(), indent=3)
 
 
