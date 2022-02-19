@@ -79,8 +79,8 @@ def server():
                     
                     print("Downlink: ", response)
                     return Response("", status=201, mimetype="application/json")
-            else:
-                return Response("", status=201, mimetype="application/json")
+                else:
+                    return Response("", status=201, mimetype="application/json")
             
     except OSError as err:
         print(err)
