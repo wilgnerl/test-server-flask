@@ -70,7 +70,7 @@ def server():
                     response = schedule_dowlink(
                         payload=payloadDownlink, port=10
                     )
-                    print(response)
+                    print("Downlink: ", response)
 
             return Response("", status=201, mimetype="application/json")
     except:
