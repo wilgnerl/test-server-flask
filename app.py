@@ -37,7 +37,7 @@ def schedule_dowlink(payload, port):
             headers={"Authorization": f"{token}"},
             data=body,
         )
-    return response.text
+    return [response.text, response.status_code]
 
 
 @app.route("/server", methods=["POST", "GET"])
