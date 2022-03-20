@@ -453,5 +453,5 @@ def server_lambda(port,data):
             data = base64.b64encode(data)
             # send_lora(data) #<<== colocar sua funcao de envio
 
-if __name__ == "__main__":
-    server()
+# if __name__ == "__main__":
+#     server()
