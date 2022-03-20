@@ -1,4 +1,3 @@
-from textwrap import indent
 from flask import Flask
 from flask import request
 from flask import Response
@@ -8,9 +7,6 @@ import base64
 import requests
 import json
 import os
-import asyncio
-import aiohttp
-
 
 token = os.environ.get("FLASK_TOKEN")
 
@@ -20,9 +16,6 @@ app = Flask(__name__)
 @app.route("/")
 def index():
     return "server running"
-
-
-
 
 def schedule_dowlink(payload, port):
 
@@ -81,6 +74,7 @@ def server():
                 else:
                     return Response("", status=201, mimetype="application/json")
         return Response("", status=201, mimetype="application/json")
+    
     except OSError as err:
         print(err)
         return Response(f"{err}", status=404, mimetype="application/json")
