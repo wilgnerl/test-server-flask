@@ -1,4 +1,3 @@
-import zmq
 import struct
 import pprint 
 import time
