@@ -2,7 +2,7 @@ from flask import Flask
 from flask import request
 from flask import Response
 from flask import jsonify
-import cmd
+import cmd_v2
 import base64
 import requests
 import json
@@ -45,20 +45,22 @@ def server():
                 # VERIFICA SE VEIO PAYLOAD NO BODY
                 print(json.loads(request.data))
                 if "payload" in json.loads(request.data)["params"]:
-                    
+                    identificador = json.loads(request.data)["meta"]["device"]
+                    print(f"identificador: {identificador}")
                     # PEGA PAYLOAD
                     payload = json.loads(request.data)["params"]["payload"]
                     print(f"Payload: {payload}")
+                    
                     # DECODIFICA PAYLOAD
                     payloadDecoded = base64.b64decode(payload)
                     print(f"Payload Decodificado: {payloadDecoded}")
 
                     # MANDA PRO TESTE
-                    responseDecode = cmd.decode(payloadDecoded)
+                    responseDecode = cmd_v2.decode(payloadDecoded)
                     print(f"Response decode: {responseDecode}")
 
                     # MANDA PRO PROCESSO
-                    responseProcess = cmd.process(responseDecode)
+                    responseProcess = cmd_v2.process(responseDecode, identificador=identificador)
                     print(f"Response process: {responseProcess}")
 
                     # PEGA RESPOSTA DO TESTE E CODIFICA PARA BASE64

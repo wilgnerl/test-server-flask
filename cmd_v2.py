@@ -8,11 +8,7 @@ import base64
 import redis
 import os
 
-r = redis.Redis(
-    host= os.environ.get("REDIS_ENDPOINT_URI"),
-    port= os.environ.get("REDIS_PORT"), 
-    password= os.environ.get("REDIS_PASSWORD")
-)
+r = redis.Redis.from_url(os.environ.get("REDIS_URL"))
 
 WF_UPLOAD_PORT = 10
 
@@ -301,7 +297,7 @@ def auto_test():
     data = encode_upl_end_ack(cmd)
     dump(data,'CMD_UPL_END_ACK')
 
-def process(cmd):
+def process(cmd, identificador):
     global UPLOADED_DATA
     data = bytes([])
     if cmd['id'] == CMD_STATUS:
@@ -345,14 +341,15 @@ def process(cmd):
         
         ####### ADAPTADO POR WILGNER
         
-        sensor_exists = check_if_key_exists("any_id")
+        sensor_exists = check_if_key_exists(identificador)
         
         ####### ADAPTADO POR WILGNER
         if sensor_exists:
-            push_itens_in_key("id_exists", list(range(0,cmd['num_segms'])))
+            push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
         
         else:
-            pass
+            push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
+            
 
         ans = { 'id': CMD_UPL_BEGIN_ACK }
 
@@ -365,9 +362,9 @@ def process(cmd):
         try:
             # ADAPTADO POR WILGNER
             
-            UPLOADED_DATA = get_list_of_index_by_key("id_sensor")
+            UPLOADED_DATA = get_list_of_index_by_key(identificador)
             # UPLOADED_DATA.remove(cmd['segm_idx'])
-            remove_index_of_list("id_sensor", cmd['segm_idx'])
+            remove_index_of_list(identificador, cmd['segm_idx'])
         except ValueError:
             pass
 
@@ -381,7 +378,7 @@ def process(cmd):
     elif cmd['id'] == CMD_UPL_END:
         dump_dict(cmd,'CMD_UPL_END')
         # ADAPTADO POR WILGNER
-        UPLOADED_DATA = get_list_of_index_by_key("id_sensor")
+        UPLOADED_DATA = get_list_of_index_by_key(identificador)
         
         if UPLOADED_DATA:
             #print("Missing segments {}".format(str(UPLOADED_DATA)))
@@ -397,7 +394,7 @@ def process(cmd):
             data = encode_upl_end_ack(ans)
             
             # ADAPTADO POR WILGNER
-            delete_key("id_sensor")
+            delete_key(identificador)
 
     else:
         print("Invalid command {}".format(cmd['id']))
