@@ -63,6 +63,8 @@ def delete_key(key):
     r.delete(key)
     return True
 
+def list_all_keys():
+    return r.keys()
 ### CREATE BY Wilgner -  Redis Functions
 
 

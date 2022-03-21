@@ -11,8 +11,6 @@ import redis
 
 token = os.environ.get("FLASK_TOKEN")
 
-r = redis.Redis.from_url(os.environ.get("REDIS_URL"))
-
 app = Flask(__name__)
 
 
@@ -22,7 +20,7 @@ def index():
 
 @app.route("/test")
 def index():
-    return r.keys()
+    return cmd_v2.list_all_keys()
 
 def schedule_dowlink(payload, port):
 
