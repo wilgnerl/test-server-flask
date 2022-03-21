@@ -30,6 +30,7 @@ SEGM_IDXS_BLOCK_SIZE = 10
 ### CREATE BY Wilgner - Redis Functions
 def check_if_key_exists(key):
     key_existis = r.exists(key)
+    r.expire(key, 21600)
     if key_existis == 1:
         print("CHAVE CONSULTADA COM SUCESSO")
         return True
@@ -39,7 +40,8 @@ def check_if_key_exists(key):
 def push_itens_in_key(key, list_index):
     list_of_index = list(range(0, 10))
     for item in list_of_index:
-        r.lpush(key, item)
+        r.lpush(key, item, )
+        r.expire(key, 21600)
     
     print("LISTA RETORNADA COM SUCESSO")
     return True
