@@ -36,9 +36,7 @@ def index():
 @app.route("/test")
 def test_redis():
     data = cmd_v2.list_all_keys()
-    return {
-        "data": data
-    }
+    return f"Data: {data}"
 
 
 
