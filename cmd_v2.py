@@ -38,8 +38,7 @@ def check_if_key_exists(key):
         return False
     
 def push_itens_in_key(key, list_index):
-    list_of_index = list(range(0, 10))
-    for item in list_of_index:
+    for item in list_index:
         r.lpush(key, item, )
         r.expire(key, 21600)
     

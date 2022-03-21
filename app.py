@@ -39,7 +39,7 @@ def test_redis():
     return f"Data: {data}"
 
 @app.route("/test/remove")
-def test_redis():
+def test_redis_remove():
     cmd_v2.delete_all()
     return "Deletado"
 
