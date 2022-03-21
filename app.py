@@ -38,6 +38,11 @@ def test_redis():
     data = cmd_v2.list_all_keys()
     return f"Data: {data}"
 
+@app.route("/test/remove")
+def test_redis():
+    cmd_v2.delete_all()
+    return "Deletado"
+
 
 
 @app.route("/server", methods=["POST", "GET"])

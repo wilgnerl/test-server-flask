@@ -65,6 +65,9 @@ def delete_key(key):
 
 def list_all_keys():
     return r.keys()
+
+def delete_all():
+    return r.flushdb()
 ### CREATE BY Wilgner -  Redis Functions
 
 
