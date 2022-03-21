@@ -47,7 +47,7 @@ def push_itens_in_key(key, list_index):
 
 def get_list_of_index_by_key(key):
     lista = [int(i) for i in r.lrange(key, 0, -1)]
-    print(lista)
+    print(f"lista {lista}")
     return lista
 
 def remove_index_of_list(key, index):
