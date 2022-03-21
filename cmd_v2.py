@@ -31,6 +31,7 @@ SEGM_IDXS_BLOCK_SIZE = 10
 def check_if_key_exists(key):
     key_existis = r.exists(key)
     if key_existis == 1:
+        print("CHAVE CONSULTADA COM SUCESSO")
         return True
     else:
         return False
@@ -39,10 +40,13 @@ def push_itens_in_key(key, list_index):
     list_of_index = list(range(0, 10))
     for item in list_of_index:
         r.lpush(key, item)
+    
+    print("LISTA RETORNADA COM SUCESSO")
     return True
 
 def get_list_of_index_by_key(key):
     lista = [int(i) for i in r.lrange(key, 0, -1)]
+    print("RETORNANDO LISTA COM SUCESSO")
     return lista
 
 def remove_index_of_list(key, index):
