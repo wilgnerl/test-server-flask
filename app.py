@@ -35,7 +35,7 @@ def index():
 
 @app.route("/test")
 def test_redis():
-    return json.dumps(cmd_v2.list_all_keys())
+    return "teste"
 
 
 
