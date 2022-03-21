@@ -13,16 +13,8 @@ token = os.environ.get("FLASK_TOKEN")
 app = Flask(__name__)
 
 
-@app.route("/")
-def index():
-    return "server running"
-
-@app.route("/test")
-def index():
-    return cmd_v2.list_all_keys()
-
 def schedule_dowlink(payload, port):
-
+  
     body = {}
     body["devEUI"] = "0100000000000001"
     body["payload"] = payload
@@ -35,6 +27,16 @@ def schedule_dowlink(payload, port):
             data=body,
         )
     return [response.text, response.status_code]
+
+
+@app.route("/")
+def index():
+    return "server running"
+
+@app.route("/test")
+def test_redis():
+    return cmd_v2.list_all_keys()
+
 
 
 @app.route("/server", methods=["POST", "GET"])
