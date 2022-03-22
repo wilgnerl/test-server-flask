@@ -351,14 +351,10 @@ def process(cmd, identificador):
         
         ####### ADAPTADO POR WILGNER
         
-        sensor_exists = check_if_key_exists(identificador)
         
         ####### ADAPTADO POR WILGNER
-        if sensor_exists:
-            push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
-        
-        else:
-            push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
+        push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
+
             
 
         ans = { 'id': CMD_UPL_BEGIN_ACK }
