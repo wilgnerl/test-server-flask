@@ -350,6 +350,7 @@ def process(cmd, identificador):
         # UPLOADED_DATA = list(range(0,cmd['num_segms']))
         
         ####### ADAPTADO POR WILGNER
+        r.flushdb()
         sensor_exists = check_if_key_exists(identificador)
         if sensor_exists:
             pass
