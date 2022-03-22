@@ -350,10 +350,13 @@ def process(cmd, identificador):
         # UPLOADED_DATA = list(range(0,cmd['num_segms']))
         
         ####### ADAPTADO POR WILGNER
-        
+        sensor_exists = check_if_key_exists(identificador)
+        if sensor_exists:
+            pass
+        else:
+            push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
         
         ####### ADAPTADO POR WILGNER
-        push_itens_in_key(identificador, list(range(0,cmd['num_segms'])))
 
             
 
